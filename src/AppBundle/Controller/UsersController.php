@@ -13,7 +13,7 @@ use FOS\RestBundle\Controller\Annotations\Version;
 /**
  * Rest controller for user
  *
- * @Version({"v1", "v2"})
+ * @Version({"1.0"})
  * @Annotations\RouteResource("/users")
  */
 class UsersController extends FOSRestController

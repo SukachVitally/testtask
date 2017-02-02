@@ -14,7 +14,6 @@ use FOS\RestBundle\Controller\Annotations\Version;
 /**
  * Rest controller for video
  *
- * @Version({"v1", "v2"})
  * @Annotations\RouteResource("/video")
  */
 class VideoController extends FOSRestController
