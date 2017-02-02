@@ -1,0 +1,17 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+user:
+    resource: "@AppBundle/Controller/UsersController.php"
+    type:     annotation
+    prefix: /api/
+
+video:
+    resource: "@AppBundle/Controller/VideoController.php"
+    type:     annotation
+    prefix: /api/
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
