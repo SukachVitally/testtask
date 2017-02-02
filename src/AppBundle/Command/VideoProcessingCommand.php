@@ -31,17 +31,28 @@ class VideoProcessingCommand extends AbstractWorkerCommand
             ->setDescription('Video processing.');
     }
 
+    /**
+     * Show worker header.
+     *
+     * @return string
+     */
     protected function getWorkerHeader()
     {
         return "Start video processing.";
     }
 
+    /**
+     * Prepare services for process.
+     */
     protected function prepareServices()
     {
         $this->queueManager = $this->getContainer()->get('app.queue_manager');
         $this->videoManager = $this->getContainer()->get('app.video_manager');
     }
 
+    /**
+     * Main process.
+     */
     protected function process()
     {
         $videoId = $this->queueManager->pop();

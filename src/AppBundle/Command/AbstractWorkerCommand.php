@@ -17,10 +17,19 @@ abstract class AbstractWorkerCommand extends ContainerAwareCommand
      */
     protected $output;
 
+    /**
+     * {@inheritDoc}
+     */
     abstract protected function process();
 
+    /**
+     * {@inheritDoc}
+     */
     abstract protected function prepareServices();
 
+    /**
+     * {@inheritDoc}
+     */
     protected function getWorkerHeader()
     {
         return 'Start process';
@@ -42,6 +51,10 @@ abstract class AbstractWorkerCommand extends ContainerAwareCommand
         }
     }
 
+    /**
+     * @param $message
+     * @param bool $showDate
+     */
     protected function showMessage($message, $showDate = true)
     {
         $message = (true === $showDate) ? '['.date("Y-m-d H:i:s").'] '.$message : $message;

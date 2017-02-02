@@ -181,18 +181,18 @@ class VideoManager
     {
         $video->setStatus(VideoModel::STATUS_PROCESSING);
         $this->save($video);
-//        try {
+        try {
             $this->getFfmpegFacade()->cutVideo(
                 $this->getUploadDirectory().'/'.self::ORIGIN_FOLDER.'/'.$video->getId().'.'.$video->getExtension(),
                 $this->getUploadDirectory().'/'.self::PROCESSED_FOLDER.'/'.$video->getId().'.'.$video->getExtension(),
                 $video->getStartTime(),
                 $video->getEndTime()
             );
-//        } catch (\FFMpeg\Exception\RuntimeException $e) {
-//            echo $e->getMessage().'\n';
-//            $video->setStatus(VideoModel::STATUS_FAILED);
-//            return $this->save($video);
-//        }
+        } catch (\FFMpeg\Exception\RuntimeException $e) {
+            echo $e->getMessage().'\n';
+            $video->setStatus(VideoModel::STATUS_FAILED);
+            return $this->save($video);
+        }
 
         $video->setStatus(VideoModel::STATUS_DONE);
         $video->setExtension(FfmpegFacade::ENCODE_EXTENSION);
