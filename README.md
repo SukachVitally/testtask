@@ -3,7 +3,7 @@
 
 1) composer install
 2) install ffmpeg lib
-3) require PHP, mongoDB (ass base storage), Redis (for queue)
+3) require PHP (Symfony3), mongoDB (as base storage), Redis (for queue)
 
 
 ## API
@@ -108,7 +108,9 @@ Output example
 
 ## Test
 
-Application has functional tests
+Application has tests
 
     start phpunit in root project folder
+
+Coverage report *tests/coverage/index.html*
 
