@@ -1,0 +1,28 @@
+services:
+    app.form.handler:
+        class: AppBundle\Form\Handler\FormHandler
+        arguments: ["@form.factory", "@request_stack"]
+    app.user_manager:
+        class: AppBundle\Service\UserManager
+        calls:
+            - [ setDoctrine, ["@doctrine_mongodb"]]
+    app.video_manager:
+        class: AppBundle\Service\VideoManager
+        calls:
+            - [ setDoctrine, ["@doctrine_mongodb"]]
+            - [ setUploadDirectory, [ %upload_directory% ]]
+            - [ setQueueManager, [ "@app.queue_manager" ]]
+            - [ setFfmpegFacade, [ "@app.ffmpeg_facade" ]]
+    app.queue_manager:
+        class: AppBundle\Service\QueueManager
+        calls:
+            - [ setRedis, [ "@snc_redis.default" ]]
+    app.ffmpeg_facade:
+        class: AppBundle\Utils\FfmpegFacade
+        arguments: [%ffmpeg_path%, %ffprobe_path%]
+    app.token_authenticator:
+        class: AppBundle\Security\TokenAuthenticator
+    app.validator.greater_than_start_time_validator:
+        class: AppBundle\Validator\Constraints\GreaterThanStartTimeValidator
+        tags:
+            - { name: validator.constraint_validator, alias: greater_than_start_time_validator }
